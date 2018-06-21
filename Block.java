@@ -19,9 +19,10 @@ public class Block{
 		String calculatehash=StringUtil.applySha256(previousHash+Long.toString(timeStamp)+Integer.toString(nonce)+data);
 		return calculatehash;
 	}
-	public void mineBlock(int difficulty) {
+	public void mining(int difficulty) {
 		String target = new String(new char[difficulty]).replace('\0', '0');
-		while (!hash.substring(0,difficulty).equals(target)) {
+		while (!hash.substring(0,difficulty).equals(target))
+		{
 			nonce ++;
 			hash=calculateHash();
 			

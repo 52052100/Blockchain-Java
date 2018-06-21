@@ -2,25 +2,25 @@ import java.util.*;
 import com.google.gson.GsonBuilder;
 
 public class Blockchain {
-	public static ArrayList<Block> blockchain = new ArrayList<Block>();
+	public static ArrayList<Block> bc = new ArrayList<Block>();
 	public static int difficulty = 5;
 
 	public static void main(String[] args) {
-		blockchain.add(new Block("First Block", "0") );
+		bc.add(new Block("First Block", "0") );
 		System.out.println("Trying to Mine block 1...");
-		blockchain.get(0).mining(difficulty);
+		bc.get(0).mining(difficulty);
 		
-		blockchain.add(new Block("Second Block", blockchain.get(blockchain.size()-1).hash) );
+		bc.add(new Block("Second Block", bc.get(bc.size()-1).hash) );
 		System.out.println("Trying to Mine block 2...");
-		blockchain.get(1).mining(difficulty);
-		blockchain.add(new Block("Third Block", blockchain.get(blockchain.size()-1).hash) );
+		bc.get(1).mining(difficulty);
+		bc.add(new Block("Third Block", bc.get(bc.size()-1).hash) );
 		System.out.println("Trying to Mine block 3...");
-		blockchain.get(2).mining(difficulty);
+		bc.get(2).mining(difficulty);
 		
 		System.out.println("\nBlockchain is Valid: " + isChainValid());
 		
 		
-		String blockchainJson = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);
+		String blockchainJson = new GsonBuilder().setPrettyPrinting().create().toJson(bc);
 		System.out.println("\nThe block chain: ");
 		System.out.println(blockchainJson);
 
@@ -30,10 +30,10 @@ public class Blockchain {
 		Block currentBlock;
 		Block previousBlock;
 		String hashTarget = new String(new char[difficulty]).replace('\0', '0');
-		for(int i =1;i<blockchain.size();i++) 
+		for(int i =1;i<bc.size();i++) 
 		{
-			currentBlock=blockchain.get(i);
-			previousBlock=blockchain.get(i-1);
+			currentBlock=bc.get(i);
+			previousBlock=bc.get(i-1);
 			if(!currentBlock.hash.equals(currentBlock.calculateHash())) {
 				System.out.println("Current hash not equal");
 				return false;
